@@ -29,10 +29,11 @@ spec:
     spec:
       securityContext:
         runAsUser: 65534    #nobody user
-        RunAsGroup: 65534 
+        fsGroup: 65534 
       containers:
       - name: mysql
         image: {{.Values.mysqlimage.name}}:{{.Values.mysqlimage.tag}}
+        args: ["--ignore-db-dir=lost+found"]
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
